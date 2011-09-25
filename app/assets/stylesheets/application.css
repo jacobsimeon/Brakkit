@@ -5,3 +5,16 @@
  *= require_self
  *= require_tree . 
 */
+
+
+div#form_wrapper{
+  width: 360px;
+  height: 320px;
+  margin: auto;
+  background: #CCC;
+  background: white;
+  padding: 20px;
+  border: 2px solid #3399CC;  
+  -webkit-border-radius: 20px;
+  -mox-border-radius: 20px;
+}
