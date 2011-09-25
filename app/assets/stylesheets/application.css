@@ -5,35 +5,3 @@
  *= require_self
  *= require_tree . 
 */
-
-/*h1#brakkit-name{
-  text-align: center;
-  text-decoration: underline;
-  font-size: 24px;
-  color: $blue-accent;
-}
-
-body{
-  font-family: Helvetica Neue, Helvetica, Arial, Sans-Serif;
-  text-align: left;
-}
-/*
-div#wrapper{
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  width: 320px;
-  margin-left: 100px;
-  background: #CCC;
-  background: white;
-  padding: 20px;
-  border-left: 2px solid #3399CC;
-  border-right: 2px solid #3399CC;
-}
-div.field_with_errors input{
-  border: 1px solid red;
-}
-h2{
-  font-size: 14px;
-  
-}*/
