@@ -1,3 +1,17 @@
-brackets layout
-<%= session_link %>
-<%= yield %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Brakkit</title>
+  <%= stylesheet_link_tag    "brakkit" %>
+  <%= javascript_include_tag "brakkit" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="wrapper">
+    <%= session_link %>
+    <p class="notice" ><%= notice %></p>
+    <p class="alert" <%= alert %></p>
+    <%= yield %>
+  </div>
+</body>
+</html>
