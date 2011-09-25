@@ -2,7 +2,66 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$blue-accent : #3399CC;
 
 body{
-  
+  background: #EEE;
+  text-align: center;
+}
+
+div#wrapper{
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 320px;
+  margin-left: 100px;
+  background: #CCC;
+  background: white;
+  padding: 20px;
+  border-left: 2px solid #3399CC;
+  border-right: 2px solid #3399CC;
+}
+
+a.session{
+  position: absolute;
+  right: 20px;
+}
+
+p.notice{
+  text-align: left;
+}
+
+h1#brakkit-name{
+  text-align: center;
+  text-decoration: underline;
+  font-size: 72px;
+  color: $blue-accent;
+}
+h2.tagline{
+  text-align: center;
+}
+p.marketing-blurb{
+  text-align: left;
+  width: 321px;
+  margin: auto;  
+}
+
+button.sign-up{
+  margin-top: 45px;
+  width: 90%;
+  height: 32px;
+  -webkit-border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 0px 5px #CCC;
+  background: #EEE;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#EEE), to($blue-accent));
+  color: white;
+}
+
+button.sign-up:hover{
+  -webkit-box-shadow: 0px 0px 5px #EEE;
+}
+button.sign-up:active{
+  -webkit-box-shadow: none;
 }

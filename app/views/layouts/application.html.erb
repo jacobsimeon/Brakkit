@@ -7,9 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  <div id="form_wrapper">
+  <div id="wrapper">
+    <%= session_link %>
+    <p class="notice" ><%= notice %></p>
+    <p class="alert" <%= alert %></p>
+    <h1 id="brakkit-name">Brakkit</h1>
     <%= yield %>
   </div>
 </body>
