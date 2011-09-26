@@ -57,6 +57,7 @@ Brakkit.Record = SC.Object.extend({
 Brakkit.Bracket = Brakkit.Record.extend({
   title : "",
   teams : [],
+  rounds : [],
   committed : false,
   urlRoot : '/brackets',
   attributes : function(){
@@ -88,14 +89,18 @@ Brakkit.Team = Brakkit.Record.extend({
 });
 
 Brakkit.Round = SC.Object.extend({
+  rank: 0,
   matches : []
 });
-Brakkit.Match = SC.Object.extend({
-  first_team : null,
-  second_team : null
+
+Brakkit.Match = Brakkit.Record.extend({
+  teams : [],
+  winner : null,
+  urlRoot : '/matches',
+  attributes : function(){
+    var self = this;
+    return {
+      match : { winner_id : self.winner }
+    };
+  }.property('winner')
 });
-Brakkit.Seed = {
-  next : function(){
-    return Brakkit.TeamsController.get('length') + 1;
-  }
-};

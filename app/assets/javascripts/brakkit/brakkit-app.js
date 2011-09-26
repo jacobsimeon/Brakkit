@@ -9,6 +9,10 @@ Brakkit.alerts = {
     });      
   }
 };
+Brakkit.startup = function(){
+  Brakkit.BracketsController.loadBrackets();  
+};
 $(function(){
   Brakkit.alerts.setHideTimeout();
+  Brakkit.startup();
 });

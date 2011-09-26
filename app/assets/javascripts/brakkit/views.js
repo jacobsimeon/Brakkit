@@ -38,8 +38,10 @@ Brakkit.NewBracketTitleView = SC.TextField.extend({
     }
   }  
 });
-
-
+Brakkit.GoButtonView = SC.Button.extend({
+  target : "Brakkit.BracketController",
+  action : "calculate"
+})
 //Teams
 Brakkit.AddTeamView = SC.TextField.extend({
   insertNewline: function(){
