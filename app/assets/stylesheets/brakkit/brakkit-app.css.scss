@@ -1,0 +1,248 @@
+
+
+/* dimensions */
+$baseline-height: 24px;
+$module-width: 128px;
+$module-height: 5 * $baseline-height;
+$gutter: 8px;
+$page-width: ($module-width * 9) + ($gutter * 9);
+$page-height: $module-height * 7;
+
+/* colors */
+$blue-accent : #3399CC;
+$notice: yellow;
+
+@mixin height($lines){
+  height: $baseline-height * $lines;
+}
+@mixin width($modules){
+  width: ($module-width + $gutter) * $modules;
+}
+
+@mixin position($top, $right:$top, $bottom:$top, $left:$top){
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin shadow($x: 0px, $y:0px, $blur: 5px, $color: #666){
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  -box-shadow: $x $y $blur $color;
+}
+
+@mixin rounded($t:5px, $r:$t, $b:$t, $l:$t){
+  -webkit-border-radius: $t $r $b $l;
+  -moz-border-radius: $t $r $b $l;
+}
+
+@mixin gradient($from, $to){
+  background: $to;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from), to($to));  
+}
+
+body{
+  @include position(0px);
+  padding: 0px;
+  overflow: hidden;
+  font-family: Futura, Helvetica Neue, Helvetica, Arial, Sans-Serif;
+}
+
+div#wrapper{
+  position: absolute;
+  @include position(0px);
+  background: url('/assets/grid.png');
+  div#new-bracket{
+    display: none;
+    @include position(0px);
+    background: url('/assets/transparency.png');
+    h3{
+      text-align : center;
+      color: $blue-accent;
+    }
+    input[type=text]{
+      height: 34px;
+      width: 80%;
+      margin-left: 10%;
+      font-size: 24px;
+    }
+    button#new-bracket-create{
+      position: absolute;
+      bottom: 15%;
+      right: 12%;
+      height: 24px;
+    }
+    div#new-bracket-config{
+      position: absolute;
+      padding: 20px;
+      top: 25%;
+      left: 25%;
+      right: 25%;
+      height: 148px;
+      background: #EEE;
+      @include rounded(25px);
+    }
+  }
+}
+
+div#bracket-list-wrapper{
+  position: absolute;
+  top: 0px;
+  left: 35%;
+  width: 120px;
+  background: white;
+  display: none;
+  @include rounded(5px);
+  border: 1px solid $blue-accent;
+  ul#bracket-list{
+    list-style: none;
+    text-indent: 0px;
+    margin-left: 0px;
+    padding-left: 5px;
+    @include rounded(5px);
+    li{
+      padding-top: 4px;
+      color: #666;
+      font-size: 12px;
+      width: 100%;
+      height: 21px;
+      text-indent: 0px;
+      background: white;
+      @include rounded(5px);
+    }
+    li div{
+      padding-left: 4px;
+    }
+    li:hover{
+      background: $blue-accent;
+      color: white;
+    }
+  }
+  #new-bracket-list-item{
+    color: #666;
+    font-size: 12px;
+    height: 21px;
+    text-indent: 0px;
+    background: white;
+    @include rounded(5px);
+    position: relative;
+    left: 5px;
+    width: 115px;
+    line-height: 10px;
+  }
+  #new-bracket-list-item:hover{
+    background: $blue-accent;
+    color: white;
+  }
+}
+
+div#menu{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  @include height(2);
+  @include gradient(#CCC, #AAA);
+  @include shadow(0px, 2px, 2px, #666);
+  span#logo-text{
+    font-family: Futura, Helvetica;
+    font-size: 24px;
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    color: $blue-accent;
+  }
+  div#bracket-selection{
+    position: absolute;
+    left: 40%;
+    top: 10px;
+    width: auto;
+    div#bracket-title{
+      float: left;
+    }
+    div#bracket-dropdown-arrow{
+      background : url('/assets/down-arrow.png');
+      height: 9px;
+      width: 19px;
+      float: right;
+      margin-top: 10px;
+      margin-left: 5px;
+      cursor: pointer;
+    }    
+  }
+  a.session{
+    position: absolute;
+    top: $baseline-height/2;
+    right: 24px;
+    font-size: 12px;
+    color: #666;
+  }
+}
+div#notices{
+  position: absolute;
+  top: $baseline-height * 2;
+  left: 0px;
+  right: 0px;
+  height: 0px;
+  overflow: visible;
+  line-height: 0px;
+  margin: 0px;
+}
+div#team-list{
+  position: absolute;
+  top: ($baseline-height * 2)+1;
+  left: 0px;
+  bottom: 0px;
+  @include width(1.5);
+  @include gradient(#CCC, #AAA);
+  input[type=text]{
+    position: absolute;
+    top: 7px;
+    left: 4px;
+    right: 4px;
+    font-size: 16px;
+    @include height(1);
+    @include rounded(3px);
+  }
+  ul#team-names{
+    position: absolute;
+    top: 7 + $baseline-height;
+    bottom: 14px;
+    left: 7px;
+    right: 7px;
+    background: white;
+    list-style: none;
+    text-indent: 0px;
+    margin-left: 0px;
+    padding-left: 0px;
+    li{
+      color: #666;
+      font-size: 24px;
+      width: 100%;
+      text-indent: 0px;
+    }
+    li div{
+      padding-left: 4px;
+    }
+    li.is-selected{
+      background: $blue-accent;
+      color: white;
+    }    
+  }
+  button#delete-selected-teams{
+    position: absolute;
+    bottom: 5px;
+    right: 56px;
+    height: 24px;
+    left: 4px;
+  }
+  button#create-bracket-button{
+    position: absolute;
+    bottom: 5px;
+    right: 6px;
+    height: 24px;
+    width: 51px;
+  }
+}

@@ -1,1 +1,58 @@
-home#brackets
+<div id="wrapper">
+  <div id="team-list">
+    <script type="text/html">
+      {{view Brakkit.AddTeamView id="new-team" placeholder="Add Team..."}}
+    </script>
+    <script type="text/html">
+      {{#collection Brakkit.TeamNamesListView contentBinding="Brakkit.TeamsController" tagName="ul" id="team-names" itemClassBinding="content.isSelected"}}
+        {{#view Brakkit.TeamNameListItemView classBinding="isSelected"}}
+          {{parentView.content.seed}} - {{parentView.content.name}}
+        {{/view}}
+      {{/collection}}
+    </script>
+    <script type="text/html">
+      {{#view Brakkit.DeleteSelectedTeamsButtonView id="delete-selected-teams" }}
+        Remove Selected
+      {{/view}}
+      {{#view SC.Button id="create-bracket-button"}}
+        Go
+      {{/view}}
+    </script>
+  </div>
+  <div id="menu">
+    <%= session_link %>
+    <span id="logo-text">Brakkit</span>
+    <script type="text/html">
+      <div id="bracket-selection">
+        {{#view SC.View id="bracket-title"}}
+          {{Brakkit.BracketController.content.title}}
+        {{/view}}
+        {{view Brakkit.BracketSelectView id="bracket-dropdown-arrow" }}
+      </div>
+    </script>
+  </div>
+  <div id="bracket-list-wrapper">
+    <script type="text/html">
+      {{#collection SC.CollectionView contentBinding="Brakkit.BracketsController" id="bracket-list" tagName="ul"}}
+        {{#view Brakkit.BracketTitleListItemView contentBinding="content"}}
+          {{content.title}}
+        {{/view}}
+      {{/collection}}
+      {{#view Brakkit.NewBracketListItem id="new-bracket-list-item"}}
+        New Bracket
+      {{/view}}
+    </script>
+  </div>
+  <div id="notices">
+    <p class="notice" ><%= notice %></p>
+    <p class="alert" ><%= alert %></p>
+  </div>
+  <div id="new-bracket">
+    <div id="new-bracket-config">
+      <h3>Enter a title for a new bracket.</h3>
+      <script type="text/html">
+        {{view Brakkit.NewBracketTitleView id="new-bracket-title" placeholder="Title..."}}
+      </script>
+    </div>
+  </div>
+</div>
