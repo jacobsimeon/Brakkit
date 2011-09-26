@@ -1,18 +1,12 @@
 class TeamsController < ApplicationController
-  # GET /teams/1
-  # GET /teams/1.json
   respond_to :json
-  
-  def index
-    respond_with current_bracket.teams
-  end
-  
+
+  # GET /teams/1.json  
   def show
     @team = Team.find(params[:id])
     respond_with @team
   end
 
-  # POST /teams
   # POST /teams.json
   def create
     @team = Team.new(params[:team])
@@ -21,7 +15,6 @@ class TeamsController < ApplicationController
     respond_with @team
   end
 
-  # PUT /teams/1
   # PUT /teams/1.json
   def update
     @team = Team.find(params[:id])
@@ -29,7 +22,6 @@ class TeamsController < ApplicationController
     respond_with @team
   end
 
-  # DELETE /teams/1
   # DELETE /teams/1.json
   def destroy
     @team = Team.find(params[:id])
