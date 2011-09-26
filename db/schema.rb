@@ -11,11 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110926020748) do
+ActiveRecord::Schema.define(:version => 20110926031524) do
 
   create_table "brackets", :force => true do |t|
     t.integer  "user_id"
     t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "matches", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "winner_id"
+    t.integer  "round_id"
+  end
+
+  create_table "matches_teams", :id => false, :force => true do |t|
+    t.integer "team_id"
+    t.integer "match_id"
+  end
+
+  create_table "rounds", :force => true do |t|
+    t.integer  "rank"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
