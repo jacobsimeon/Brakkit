@@ -2,20 +2,21 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   respond_to :json
+  
+  def index
+    respond_with current_bracket.teams
+  end
+  
   def show
     @team = Team.find(params[:id])
     respond_with @team
-  end
-
-  # GET /teams/1/edit
-  def edit
-    @team = Team.find(params[:id])
   end
 
   # POST /teams
   # POST /teams.json
   def create
     @team = Team.new(params[:team])
+    current_bracket.teams.push @team
     @team.save
     respond_with @team
   end

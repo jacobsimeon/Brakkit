@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110926010441) do
+ActiveRecord::Schema.define(:version => 20110926020748) do
 
   create_table "brackets", :force => true do |t|
     t.integer  "user_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20110926010441) do
     t.integer  "seed"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "bracket_id"
   end
 
   create_table "users", :force => true do |t|
