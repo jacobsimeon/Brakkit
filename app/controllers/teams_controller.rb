@@ -9,9 +9,9 @@ class TeamsController < ApplicationController
 
   # POST /teams.json
   def create
-    @team = Team.new(params[:team])
-    current_bracket.teams.push @team
-    @team.save
+    @bracket = Bracket.find(params[:bracket_id])
+    @team = Team.create(params[:team])
+    @bracket.teams.push @team
     respond_with @team
   end
 

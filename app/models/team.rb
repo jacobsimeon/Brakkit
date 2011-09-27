@@ -4,6 +4,7 @@ class Team < ActiveRecord::Base
 
   def as_json(optins)
     {
+      id: self.id,
       name: self.name,
       seed: self.seed
     }

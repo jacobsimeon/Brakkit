@@ -50,6 +50,21 @@ body{
   font-family: Futura, Helvetica Neue, Helvetica, Arial, Sans-Serif;
 }
 
+div#bracket{
+  position: absolute;
+  top: $baseline-height * 2;
+  left: ($module-width + $gutter) * 1.5;
+  right: 0px;
+  bottom: 0px;
+  div.round{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    @include width(1.5);
+    border: 1px solid blue;
+  }
+}
+
 div#wrapper{
   position: absolute;
   @include position(0px);

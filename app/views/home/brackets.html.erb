@@ -31,6 +31,23 @@
       </div>
     </script>
   </div>
+  <div id="bracket">
+    <script type="text/html">
+      {{#collection Brakkit.BracketView contentBinding="Brakkit.RoundsController.content" itemStyleBinding="style"}}
+        {{#view Brakkit.RoundView class="round-wrapper" styleBinding="style" contentBinding="content"}}
+          <div {{bindAttr style="style"}} class="round" >
+            {{#collection Brakkit.MatchesView contentBinding="content.matches"}}
+              {{#collection Brakkit.MatchView class="match" contentBinding="content.teams"}}
+                {{#view Brakkit.TeamView class="team" contentBinding="content"}}
+                  {{content.name}}
+                {{/view}}
+              {{/collection}}
+            {{/collection}}
+          </div>
+        {{/view}}
+      {{/collection}}
+    </script>  
+  </div>
   <div id="bracket-list-wrapper">
     <script type="text/html">
       {{#collection SC.CollectionView contentBinding="Brakkit.BracketsController" id="bracket-list" tagName="ul"}}

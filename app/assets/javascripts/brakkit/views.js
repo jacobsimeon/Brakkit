@@ -66,3 +66,17 @@ Brakkit.DeleteSelectedTeamsButtonView = SC.Button.extend({
   target : "Brakkit.TeamsController",
   action : "removeSelected"
 });
+
+Brakkit.BracketView = SC.CollectionView.extend({
+});
+Brakkit.RoundView = SC.View.extend({
+  style : function(){
+    var self = this;
+    var left = (self.parentView.get('content').get('rank')-1) * (204);
+    return "left: "+left+"px;";
+  }.property()
+})
+Brakkit.MatchesView = SC.CollectionView.extend({  
+})
+Brakkit.MatchView = SC.CollectionView.extend({});
+Brakkit.TeamView = SC.View.extend({});

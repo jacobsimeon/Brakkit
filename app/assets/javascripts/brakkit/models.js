@@ -34,11 +34,10 @@ Brakkit.Record = SC.Object.extend({
     var self = this;
     if(!this.get('isNew')){
       var urlRoot = this.get('urlRoot'),
-      url = urlRoot + '/' + this.get('id'),
-      method = 'DELETE',
-      data = {};
-      data._method = method;
-
+          url = urlRoot + '/' + this.get('id'),
+          method = 'DELETE',
+          data = {};
+          data._method = method;
       $.ajax(url, {
         type: 'POST',
         data: data, // this.get('attributes'){ bracket: this.get('attributes'), _method: method },
@@ -73,6 +72,7 @@ Brakkit.Bracket = Brakkit.Record.extend({
 Brakkit.Team = Brakkit.Record.extend({
   name: "",
   seed: 0,
+  bracket_id: null,
   isSelected: false,
   attributes : function(){
     var self = this;
@@ -80,13 +80,14 @@ Brakkit.Team = Brakkit.Record.extend({
       team : {
         name : self.get('name'),
         seed : self.get('seed')
-      }
+      },
+      bracket_id : self.get('bracket_id')
     };
-    console.log(_attributes);
     return _attributes;
   }.property('name', 'seed'),
   urlRoot : '/teams'
 });
+Brakkit.Team.anonymous = Brakkit.Team.create({ name : "?", seed : "?" });
 
 Brakkit.Round = SC.Object.extend({
   rank: 0,
@@ -94,7 +95,7 @@ Brakkit.Round = SC.Object.extend({
 });
 
 Brakkit.Match = Brakkit.Record.extend({
-  teams : [],
+  teams : [ Brakkit.Team.anonymous, Brakkit.Team.anonymous ],
   winner : null,
   urlRoot : '/matches',
   attributes : function(){
