@@ -68,15 +68,37 @@ Brakkit.DeleteSelectedTeamsButtonView = SC.Button.extend({
 });
 
 Brakkit.BracketView = SC.CollectionView.extend({
+  moveWinner : function(round, team){
+    
+  }
 });
 Brakkit.RoundView = SC.View.extend({
   style : function(){
     var self = this;
     var left = (self.parentView.get('content').get('rank')-1) * (204);
-    return "left: "+left+"px;";
-  }.property()
+    var bg = (self.parentView.get('content').get('rank') % 2 === 0) ? '#CCB;' : 'whitesmoke;'
+    return "left: "+left+"px; background: "+bg;
+  }.property(),
 })
-Brakkit.MatchesView = SC.CollectionView.extend({  
-})
+Brakkit.MatchesView = SC.CollectionView.extend({})
 Brakkit.MatchView = SC.CollectionView.extend({});
-Brakkit.TeamView = SC.View.extend({});
+Brakkit.TeamView = SC.Button.extend({
+  isWinner : null,
+  click : function(){
+    var self = this;
+    var match = self.parentView.parentView.parentView.get('content');
+    var roundView = self.parentView.parentView.parentView.parentView.parentView;
+    var round = roundView.get('content');
+    var team = self.get('content');
+    if(!self.get('isWinner')){
+      if(match.get('teams').contains(Brakkit.Team.anonymous)){
+        alert("Please wait until the match is completed.");
+      } else {
+        Brakkit.WinnerController.setWinner(round, match, team);
+        self.set('isWinner', true);
+      }
+    } else {
+      alert("Sorry, winner cannot be changed.");
+    }
+  }
+});

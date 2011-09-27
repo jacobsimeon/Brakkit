@@ -48,6 +48,11 @@ body{
   padding: 0px;
   overflow: hidden;
   font-family: Futura, Helvetica Neue, Helvetica, Arial, Sans-Serif;
+  span#click-go{
+    position: absolute;
+    top: 48%;
+    left: 42%;
+  }
 }
 
 div#bracket{
@@ -56,19 +61,51 @@ div#bracket{
   left: ($module-width + $gutter) * 1.5;
   right: 0px;
   bottom: 0px;
+  h3.round{
+    text-align: center;
+    color: $blue-accent;
+  }
   div.round{
     position: absolute;
     top: 0px;
     bottom: 0px;
     @include width(1.5);
-    border: 1px solid blue;
+    border-right: 1px solid #CCC;
+    div.match{
+      margin: auto;
+      margin-top: 25px;
+      background: white;
+      border: 2px solid $blue-accent;
+      @include width(1.25);
+      @include height(2);
+      @include rounded(10px);
+      text-align: center;
+      @include shadow(0px, 0px, 8px, #666);
+      button.team{
+        width: 80%;
+        background : white;
+        border: none;
+        @include rounded(5px)
+      }
+      button.team.is-loser{
+        text-decoration: line-through;
+      }
+      button.team.is-winner{
+        font-weight: bold;
+      }
+      button.team:hover{
+        color: white;
+        background : $blue-accent;
+        cursor: pointer;
+      }
+    }
   }
 }
 
 div#wrapper{
+  @include shadow;
   position: absolute;
   @include position(0px);
-  background: url('/assets/grid.png');
   div#new-bracket{
     display: none;
     @include position(0px);

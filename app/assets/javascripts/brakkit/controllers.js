@@ -123,6 +123,10 @@ Brakkit.TeamsController = SC.ArrayProxy.create({
     }
   }.observes("Brakkit.BracketController.content"),
   addTeam: function(_name, _seed){
+    if(this.get('length') > 23){
+      alert('Maximum of 24 Teams');
+      return;
+    }
     var team = Brakkit.Team.create({
       name : _name,
       seed : Brakkit.Seeder.next(),
@@ -159,18 +163,44 @@ Brakkit.TeamsController = SC.ArrayProxy.create({
 
 //Rounds
 Brakkit.RoundsController = SC.ArrayProxy.create({
-  loadRounds : function(){
-    // var self = this;
-    // var c = [];
-    // var bracket = Brakkit.BracketController.get('content');
-    // if(bracket){
-    //   bracket.get('rounds').forEach(function(value){
-    //     $.getJSON('/rounds/'+value, function(data){
-    //       c.pushObject(Brakkit.Round.create(data));
-    //     });
-    //   });
-    // }
-    // self.set('content', c);
-  }.observes("content"),
+  addTeamToRound : function(round, team){
+    console.log(team);
+    var self = this;
+    var index = self.indexOf(round);
+    var teamIndex = null;
+    var nextRound = self.objectAt(index + 1);
+    var nextMatch = nextRound.get('matches').filter(function(match){
+      var ts = match.get('teams');
+      return ts.contains(Brakkit.Team.anonymous);
+    }).objectAt(0);
+    nextMatch.get('teams').forEach(function(t, i){
+      if(t === Brakkit.Team.anonymous && teamIndex === null){
+        teamIndex = i;
+      }
+    });
+    nmTeams = nextMatch.get('teams').copy();
+    nmTeams[teamIndex] = team;
+    nextMatch.set('teams', nmTeams);
+  },
   contentBinding : "Brakkit.BracketController.content.rounds"
 });
+Brakkit.WinnerController = SC.Object.create({
+  addTeamToNextMatch : function(fromRound, winner){
+    var nextRound = Brakkit.RoundController.filter(function(round){
+      return round.get('rank') === (fromRound.get('rank') + 1);
+    }).objectAt(0);
+    var nextMatch = round.get('matches').filter(function(match){
+      var a = match.get('teams')[0] === Brakkit.Team.anonymous;
+      return a ? a : match.get('teams')[1] === Brakkit.Team.anonymous;
+    }).objectAt(0);
+    var replaceIndex = round.get('teams')[0]
+  
+  },
+  setWinner : function(round, match, winner){
+    var self = this;
+    match.set('winner', winner);
+    Brakkit.RoundsController.addTeamToRound(round, winner);
+    console.log(match);
+    console.log(winner);
+  }
+})

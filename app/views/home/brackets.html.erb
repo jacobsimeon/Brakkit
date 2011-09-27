@@ -1,4 +1,5 @@
 <div id="wrapper">
+  <span id="click-go">Click 'Go' To Generate a Bracket</span>
   <div id="team-list">
     <script type="text/html">
       {{view Brakkit.AddTeamView id="new-team" placeholder="Add Team..."}}
@@ -19,6 +20,24 @@
       {{/view}}
     </script>
   </div>
+  <div id="bracket">
+    <script type="text/html">
+      {{#collection Brakkit.BracketView contentBinding="Brakkit.RoundsController.content" itemStyleBinding="style"}}
+        {{#view Brakkit.RoundView class="round-wrapper" styleBinding="style" contentBinding="content"}}
+          <div {{bindAttr style="style"}} class="round">
+            <h3 class="round">Round {{content.rank}}</h3>
+            {{#collection Brakkit.MatchesView contentBinding="content.matches"}}
+              {{#collection Brakkit.MatchView class="match" contentBinding="content.teams"}}
+                {{#view Brakkit.TeamView class="team" contentBinding="content" classBinding="isWinner"}}
+                  {{content.name}}
+                {{/view}}
+              {{/collection}}
+            {{/collection}}
+          </div>
+        {{/view}}
+      {{/collection}}
+    </script>  
+  </div>
   <div id="menu">
     <%= session_link %>
     <span id="logo-text">Brakkit</span>
@@ -30,23 +49,6 @@
         {{view Brakkit.BracketSelectView id="bracket-dropdown-arrow" }}
       </div>
     </script>
-  </div>
-  <div id="bracket">
-    <script type="text/html">
-      {{#collection Brakkit.BracketView contentBinding="Brakkit.RoundsController.content" itemStyleBinding="style"}}
-        {{#view Brakkit.RoundView class="round-wrapper" styleBinding="style" contentBinding="content"}}
-          <div {{bindAttr style="style"}} class="round" >
-            {{#collection Brakkit.MatchesView contentBinding="content.matches"}}
-              {{#collection Brakkit.MatchView class="match" contentBinding="content.teams"}}
-                {{#view Brakkit.TeamView class="team" contentBinding="content"}}
-                  {{content.name}}
-                {{/view}}
-              {{/collection}}
-            {{/collection}}
-          </div>
-        {{/view}}
-      {{/collection}}
-    </script>  
   </div>
   <div id="bracket-list-wrapper">
     <script type="text/html">
