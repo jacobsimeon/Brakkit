@@ -4,5 +4,6 @@ Brakkit::Application.routes.draw do
   resources :brackets
   resources :teams
   resources :rounds
+  resources :matches
   root :to => "home#index"
 end

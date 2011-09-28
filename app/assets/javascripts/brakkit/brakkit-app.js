@@ -10,6 +10,12 @@ Brakkit.alerts = {
   }
 };
 
+Brakkit.Seeder = {
+  next : function(){
+    return Brakkit.TeamsController.get('content').get('length') + 1;
+  }
+};
+
 Brakkit.BracketsController = SC.ArrayProxy.create({
   content : [],
   selected : null,

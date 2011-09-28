@@ -35,7 +35,6 @@ Brakkit.BracketController = SC.Object.create({
   round : function(_teams, numMatches, _rank){
     var self = this;
     var round = Brakkit.Round.create({ rank : _rank, bracket_id : self.get('content').get('id') });
-    round.save();
     var teams = [];
     var matches = [];
     for(var i = 0; i < numMatches; i++){
@@ -44,6 +43,13 @@ Brakkit.BracketController = SC.Object.create({
       }));
     }
     round.set('matches', matches);
+    round.save(function(){
+      round.get('matches').setEach('round_id', round.get('id'));
+      matches.invoke('save');
+      // matches.forEach(function(match){
+      //   match.save(function(){ console.log(match.get('attributes'))});
+      // });
+    });
     return round;
   },
   nextTeam : function(teams){
