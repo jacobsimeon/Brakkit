@@ -6,15 +6,8 @@ Brakkit.TeamView = SC.Button.extend({
     var roundView = self.parentView.parentView.parentView.parentView.parentView;
     var round = roundView.get('content');
     var team = self.get('content');
-    if(!self.get('isWinner')){
-      if(match.get('teams').contains(Brakkit.Team.anonymous)){
-        alert("Please wait until the match is completed.");
-      } else {
-        Brakkit.WinnerController.setWinner(round, match, team);
-        self.set('isWinner', true);
-      }
-    } else {
-      alert("Sorry, winner cannot be changed.");
-    }
+    if(Brakkit.WinnerController.setWinner(round, match, team)){
+      self.set('isWinner', true);
+    };
   }
 });

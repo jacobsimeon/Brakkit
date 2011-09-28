@@ -1,5 +1,6 @@
 
 //= require ./record
+//= require ./team
 
 Brakkit.Match = Brakkit.Record.extend({
   teams : [ Brakkit.Team.anonymous, Brakkit.Team.anonymous ],
