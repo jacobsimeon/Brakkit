@@ -20,6 +20,6 @@ test:
 
 production:
   adapter: mysql
-  database: db/production.sqlite3
+  database: brakkit
   pool: 25
-  timeout: 5000
+  timeout: 60000
