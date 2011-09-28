@@ -18,4 +18,17 @@ class Match < ActiveRecord::Base
     }
   end
   
+  def update_teams team_ids
+    if team_ids.is_a? Array
+      self.teams.clear
+      team_ids.each do |team_id|
+        unless team_id == '0'
+          team = Team.find team_id
+          self.teams.push team
+        end
+      end
+      self.save
+    end
+  end
+  
 end

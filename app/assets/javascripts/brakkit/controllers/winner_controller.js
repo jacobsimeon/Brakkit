@@ -15,7 +15,9 @@ Brakkit.WinnerController = SC.Object.create({
     }
     if(match.get('winner') == null || match.get('winner') == Brakkit.Team.anonymous){
       match.set('winner', winner);
+      //match.save();
       Brakkit.RoundsController.addTeamToRound(nextRound, winner);
+      match.save();
       return true;
     } else {
       alert("Sorry, cannot change winner");

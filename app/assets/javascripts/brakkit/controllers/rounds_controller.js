@@ -1,7 +1,6 @@
 //Rounds
 Brakkit.RoundsController = SC.ArrayProxy.create({
   addTeamToRound : function(round, team){
-    console.log(team);
     var self = this;
     var index = self.indexOf(round);
     var teamIndex = null;
@@ -18,6 +17,7 @@ Brakkit.RoundsController = SC.ArrayProxy.create({
     nmTeams = nextMatch.get('teams').copy();
     nmTeams[teamIndex] = team;
     nextMatch.set('teams', nmTeams);
+    nextMatch.save();
   },
   loadRounds : function(){
     var self = this,

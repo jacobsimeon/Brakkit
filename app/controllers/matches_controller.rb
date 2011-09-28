@@ -12,15 +12,16 @@ class MatchesController < ApplicationController
     if @round
       @round.matches.clear
       @match = Match.create      
-      if params[:teams].is_a? Array
-        params[:teams].each do |team_id|
-          unless team_id == '0'
-            team = Team.find team_id
-            @match.teams.push team
-          end
-        end
-      end
-      @match.save
+      @match.update_teams params[:teams]
+      # if params[:teams].is_a? Array
+      #   params[:teams].each do |team_id|
+      #     unless team_id == '0'
+      #       team = Team.find team_id
+      #       @match.teams.push team
+      #     end
+      #   end
+      # end
+      # @match.save
       @round.matches.push @match
     end
     respond_with @match
@@ -30,6 +31,7 @@ class MatchesController < ApplicationController
   def update
     @match = Match.find(params[:id])
     @match.update_attributes(params[:match])
+    @match.update_teams params[:teams]
     respond_with @match
   end
 

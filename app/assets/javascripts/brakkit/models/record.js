@@ -6,10 +6,10 @@ Brakkit.Record = SC.Object.extend({
   }.property('id').cacheable(),
   save : function(callback){
     var self = this,
-        urlRoot = this.get('urlRoot'),
-        url = this.get('isNew') ? urlRoot : urlRoot + '/' + this.get('id'),
-        method = this.get('isNew') ? 'POST' : 'PUT',
-        data = this.get('attributes');
+        urlRoot = self.get('urlRoot'),
+        url = self.get('isNew') ? urlRoot : urlRoot + '/' + this.get('id'),
+        method = self.get('isNew') ? 'POST' : 'PUT',
+        data = self.get('attributes');
         data._method = method;
         
     $.ajax(url, {
