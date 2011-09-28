@@ -3,5 +3,6 @@ Brakkit::Application.routes.draw do
   devise_for :users
   resources :brackets
   resources :teams
+  resources :rounds
   root :to => "home#index"
 end
