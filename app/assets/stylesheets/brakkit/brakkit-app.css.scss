@@ -225,11 +225,18 @@ div#menu{
     }    
   }
   a.session{
+    right: 24px;
+  }
+  a{
     position: absolute;
     top: $baseline-height/2;
-    right: 24px;
     font-size: 12px;
     color: #666;
+  }
+  a#delete-bracket{
+    right: 84px;
+    text-decoration: underline;
+    cursor: pointer;
   }
 }
 div#notices{

@@ -16,7 +16,12 @@ Brakkit.Match = Brakkit.Record.extend({
             return 0;
           }
         });
-    var winner_id = self.winner.get('id') ? self.winner.get('id') : null;
+    var winner_id = function(){
+      var winner = self.get('winner')
+      if(winner){
+        return winner.get('id') ? winner.get('id') : null;
+      } return null;
+    }();
     var _attributes = {
       match : { winner_id : winner_id },
       round_id : self.get('round_id'),

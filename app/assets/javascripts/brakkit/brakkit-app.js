@@ -37,12 +37,19 @@ Brakkit.BracketsController = SC.ArrayProxy.create({
         var bracket = Brakkit.Bracket.create(value);
         self.pushObject(bracket);
       });
-      if(self.get('length') === 0){
-         $('#new-bracket').show();
-      } else {
-        self.selectBracket(self.objectAt(0));
-      }
+      self.selectNext();
     });    
+  },
+  selectNext : function(){
+    var self = this;
+    if(self.get('length') === 0){
+       $('#new-bracket').show();
+    } else {
+      self.selectBracket(self.objectAt(0));
+    }
+  },
+  showCreate : function(){
+    
   },
   selectBracket : function(bracket){
     //set the current bracket

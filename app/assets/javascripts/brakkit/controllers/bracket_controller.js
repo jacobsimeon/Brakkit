@@ -70,5 +70,11 @@ Brakkit.BracketController = SC.Object.create({
     Brakkit.RoundsController.clearRounds();
     self.createRounds(self.get('content'));
   },
+  deleteBracket : function(){
+    var c = this.get('content');
+    c.remove();
+    Brakkit.BracketsController.removeObject(c);
+    Brakkit.BracketsController.selectNext()
+  },
   contentBinding : "Brakkit.BracketsController.selected",
 });

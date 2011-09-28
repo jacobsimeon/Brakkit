@@ -1,22 +1,19 @@
 Brakkit.WinnerController = SC.Object.create({
   setWinner : function(round, match, winner){
     var self = this;
-    var validTeams = function(){
-      return match.get('teams').contains(Brakkit.Team.anonymous);
-    }
+    var validTeams = !match.get('teams').contains(Brakkit.Team.anonymous);
     if(!validTeams){
       alert("Please wait until the match is completed before selecting a winner.");
       return false;
     }
     var nextRound = self.getNextRound(round);
-    if(!nextRound){
-      alert("Congratulations to " + winner.get('name') + "!\n You won!");
-      return false;
-    }
     if(match.get('winner') == null || match.get('winner') == Brakkit.Team.anonymous){
       match.set('winner', winner);
-      //match.save();
-      Brakkit.RoundsController.addTeamToRound(nextRound, winner);
+      if(nextRound){
+        Brakkit.RoundsController.addTeamToRound(nextRound, winner);
+      } else {
+        alert("Congratulations to " + winner.get('name') + "!\n You won!");
+      }
       match.save();
       return true;
     } else {

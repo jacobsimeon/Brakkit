@@ -1,13 +1,21 @@
 Brakkit.TeamView = SC.Button.extend({
-  isWinner : null,
+  match : function(){
+    return this.parentView.parentView.parentView.get('content');    
+  }.property(),
+  isWinner : function(){
+    var self = this;
+    var winner = self.get('match').get('winner');
+    if(winner){
+      return winner.get('id') == self.get('content').get('id');
+    }
+    return false;
+  }.property('match.winner'),
   click : function(){
     var self = this;
-    var match = self.parentView.parentView.parentView.get('content');
+    var match = self.get('match');
     var roundView = self.parentView.parentView.parentView.parentView.parentView;
     var round = roundView.get('content');
     var team = self.get('content');
-    if(Brakkit.WinnerController.setWinner(round, match, team)){
-      self.set('isWinner', true);
-    };
+    Brakkit.WinnerController.setWinner(round, match, team);
   }
 });

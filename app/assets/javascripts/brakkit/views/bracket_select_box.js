@@ -30,10 +30,19 @@ Brakkit.NewBracketListItem = SC.View.extend({
 });
 Brakkit.NewBracketTitleView = SC.TextField.extend({
   insertNewline : function(){
+    var self = this;
     var bracketTitle =  this.get('value');
     if(bracketTitle){
       Brakkit.BracketsController.addBracket(bracketTitle);
-      $('#new-bracket').fadeOut();
+      $('#new-bracket').fadeOut(function(){
+        self.set('value', '');
+      });
     }
   }  
 });
+
+Brakkit.DeleteBracketLinkView = SC.View.extend({
+  click : function(){
+    Brakkit.BracketController.deleteBracket();
+  }
+})

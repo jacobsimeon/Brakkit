@@ -32,7 +32,7 @@ Brakkit.RoundsController = SC.ArrayProxy.create({
           matches : data.matches.map(function(m){
             return Brakkit.Match.create({
               id : m.id,
-              winner : m.winner ? null : Brakkit.TeamsController.findTeam(m.winner),
+              winner : m.winner ? Brakkit.TeamsController.findTeam(m.winner) : null,
               teams : function(){
                 if(m.teams.length == 0){
                   return [ Brakkit.Team.anonymous, Brakkit.Team.anonymous ]
