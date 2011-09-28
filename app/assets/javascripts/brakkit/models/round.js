@@ -1,7 +1,13 @@
 
-//= require ./record
+//= require ./record.js
 
-Brakkit.Round = SC.Object.extend({
+Brakkit.Round = Brakkit.Record.extend({
   rank: 0,
-  matches : []
+  bracket_id : null,
+  matches : [],
+  urlRoot : '/rounds',
+  attributes : function(){
+    var self= this;
+    return { round : { rank : self.get('rank') }, bracket_id : self.get('bracket_id') };
+  }.property('rank', 'bracket_id')
 });

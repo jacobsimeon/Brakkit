@@ -33,7 +33,8 @@ Brakkit.BracketController = SC.Object.create({
   },
   round : function(_teams, numMatches, _rank){
     var self = this;
-    var round = Brakkit.Round.create({ rank : _rank });
+    var round = Brakkit.Round.create({ rank : _rank, bracket_id : self.get('content').get('id') });
+    round.save();
     var teams = [];
     var matches = [];
     for(var i = 0; i < numMatches; i++){

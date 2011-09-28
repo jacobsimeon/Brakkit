@@ -8,7 +8,11 @@ class RoundsController < ApplicationController
 
   # POST /rounds.json
   def create
-    @round = Round.create(params[:round])
+    @bracket = Bracket.find params[:bracket_id]
+    if @bracket
+      @round = Round.create(params[:round])
+      @bracket.rounds.push @round
+    end
     respond_with @round
   end
 
