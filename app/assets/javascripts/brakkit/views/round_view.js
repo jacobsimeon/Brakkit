@@ -5,4 +5,4 @@ Brakkit.RoundView = SC.View.extend({
     var bg = (self.parentView.get('content').get('rank') % 2 === 0) ? '#CCB;' : 'whitesmoke;'
     return "left: "+left+"px; background: "+bg;
   }.property(),
-})
+});

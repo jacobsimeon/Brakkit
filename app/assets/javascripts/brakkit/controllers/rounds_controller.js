@@ -23,5 +23,24 @@ Brakkit.RoundsController = SC.ArrayProxy.create({
     nmTeams[teamIndex] = team;
     nextMatch.set('teams', nmTeams);
   },
-  contentBinding : "Brakkit.BracketController.content.rounds"
+  loadRounds : function(){
+    var self = this,
+        bracket = Brakkit.BracketController.get('content'),
+        rounds = [];
+    if(!bracket) return false;
+    Brakkit.BracketController.get('content').get('rounds').forEach(function(round_id){
+      $.getJSON('/rounds/' + round_id, function(data){
+        rounds.pushObject(Brakkit.Round.create(data));
+      });
+    });
+    self.set('content', rounds);
+  }.observes("Brakkit.BracketController.content.rounds"),
+  clearRounds : function(){
+    var self = this;
+    if(self.get('length') > 0){
+      self.invoke('remove');
+    }
+    self.set('content',[]);
+  },
+  content : []
 });

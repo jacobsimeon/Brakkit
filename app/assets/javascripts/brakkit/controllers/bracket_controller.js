@@ -19,15 +19,16 @@ Brakkit.BracketController = SC.Object.create({
         numTeams = teams.get('length'),
         numMatches = self.eliminate(numTeams),
         numRounds = self.totalRounds(numMatches, numTeams);
+    Brakkit.RoundsController.clearRounds();
 
     //first round
     var round = self.round(teams, numMatches, 1);
-    bracket.get('rounds').pushObject(round);
+    Brakkit.RoundsController.pushObject(round);
     //other rounds
     numMatches = (numTeams - numMatches) / 2;
     for(i = 2; i <= numRounds; i++){
       var round = self.round(teams, numMatches, i);
-      bracket.get('rounds').pushObject(round);
+      Brakkit.RoundsController.pushObject(round);
       numMatches = numMatches / 2;    
     }
   },
@@ -59,6 +60,8 @@ Brakkit.BracketController = SC.Object.create({
   },
   calculate : function(){
     var self = this;
+    //var existingRounds = Brakkit.RoundsController.get('content');
+    Brakkit.RoundsController.clearRounds();
     self.createRounds(self.get('content'));
   },
   contentBinding : "Brakkit.BracketsController.selected",
