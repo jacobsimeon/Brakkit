@@ -13,7 +13,7 @@ class Match < ActiveRecord::Base
   def as_json options
     {
       id: self.id,
-      teams: self.teams.map{ |t| t.id },
+      teams: self.teams,
       winner: self.winner_id
     }
   end

@@ -7,10 +7,6 @@ Brakkit.RoundsController = SC.ArrayProxy.create({
     var teamIndex = null;
     var nextRound = self.objectAt(index + 1);
     var nextMatch = Brakkit.MatchesController.nextAvailableMatch(round);
-    // var nextMatch = nextRound.get('matches').filter(function(match){
-    //   var ts = match.get('teams');
-    //   return ts.contains(Brakkit.Team.anonymous);
-    // }).objectAt(0);
     if(!nextMatch){
       return false;
     }
@@ -30,7 +26,28 @@ Brakkit.RoundsController = SC.ArrayProxy.create({
     if(!bracket) return false;
     Brakkit.BracketController.get('content').get('rounds').forEach(function(round_id){
       $.getJSON('/rounds/' + round_id, function(data){
-        rounds.pushObject(Brakkit.Round.create(data));
+        var r = Brakkit.Round.create({
+          rank : data.rank,
+          id : data.id,
+          matches : data.matches.map(function(m){
+            return Brakkit.Match.create({
+              id : m.id,
+              winner : m.winner ? null : Brakkit.TeamsController.findTeam(m.winner),
+              teams : function(){
+                if(m.teams.length == 0){
+                  return [ Brakkit.Team.anonymous, Brakkit.Team.anonymous ]
+                }
+                if(m.teams.length == 1){
+                  return [Brakkit.Team.create(m.teams[0]), Brakkit.Team.anonymous];
+                }
+                return m.teams.map(function(team){
+                  return Brakkit.Team.create(team);
+                })
+              }()
+            })
+          })
+        });
+        rounds.pushObject(r);
       });
     });
     self.set('content', rounds);

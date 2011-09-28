@@ -2,7 +2,7 @@ Brakkit.WinnerController = SC.Object.create({
   setWinner : function(round, match, winner){
     var self = this;
     var validTeams = function(){
-      return match.get('teams').contains(Brakkit.Team.anonymou);
+      return match.get('teams').contains(Brakkit.Team.anonymous);
     }
     if(!validTeams){
       alert("Please wait until the match is completed before selecting a winner.");
@@ -13,7 +13,7 @@ Brakkit.WinnerController = SC.Object.create({
       alert("Congratulations to " + winner.get('name') + "!\n You won!");
       return false;
     }
-    if(match.get('winner') == null){
+    if(match.get('winner') == null || match.get('winner') == Brakkit.Team.anonymous){
       match.set('winner', winner);
       Brakkit.RoundsController.addTeamToRound(nextRound, winner);
       return true;

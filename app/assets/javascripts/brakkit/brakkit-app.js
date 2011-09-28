@@ -33,7 +33,7 @@ Brakkit.BracketsController = SC.ArrayProxy.create({
   loadBrackets : function(){
     var self = this;
     $.getJSON('/brackets',function(data, status, xhr){
-      data.forEach(function(value){
+      data.map(function(value){
         var bracket = Brakkit.Bracket.create(value);
         self.pushObject(bracket);
       });

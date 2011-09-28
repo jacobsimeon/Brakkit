@@ -28,6 +28,13 @@ Brakkit.TeamsController = SC.ArrayProxy.create({
       Brakkit.BracketController.get('content').get('teams').pushObject(team.get('id'));
     });
   },
+  findTeam : function(id){
+    var self = this;
+    var teams = self.filter(function(team){
+      return team.get('id') === parseInt(id);
+    });
+    return teams.get('length') > 0 ? teams.objectAt(0) : Brakkit.Team.anonymous;
+  },
   reseed : function(){
     var seed = 1;
     this.content.forEach(function(value){
